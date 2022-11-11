@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto/pages/home_page.dart';
+import 'package:projeto/home_page.dart';
 import 'package:projeto/pages/login_page.dart';
 import 'package:projeto/pages/splash_page.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (_) => const SplashPage(),
         '/login': (_) => LoginPage(),
-        '/home': (_) => const HomePage(),
+        '/home': (_) => HomePage(),
       },
     );
   }
