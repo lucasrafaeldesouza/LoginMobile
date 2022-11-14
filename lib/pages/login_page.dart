@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:projeto/components/login/custom_login_button_component.dart';
 import 'package:projeto/controllers/login_controller.dart';
+import 'package:projeto/widgets/custom_text_field_widget.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginController _controller = LoginController();
@@ -19,44 +21,19 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.people, size: MediaQuery.of(context).size.height * 0.3),
-            TextField(
-              decoration: InputDecoration(label: Text('Login')),
+            Icon(Icons.people, size: MediaQuery.of(context).size.height * 0.2),
+            CustomTextFieldWidget(
               onChanged: _controller.setLogin,
+              label: 'login',
+              obscureText: false,
             ),
             TextField(
               decoration: InputDecoration(label: Text('Senha')),
-              obscureText: true,
               onChanged: _controller.setPass,
+              obscureText: true,
             ),
             SizedBox(height: 15),
-            ValueListenableBuilder<bool>(
-              valueListenable: _controller.inLoader,
-              builder: (_, inLoader, __) => inLoader
-                  ? CircularProgressIndicator()
-                  : ElevatedButton(
-                      onPressed: () {
-                        _controller.auth().then(
-                              (result) => {
-                                if (result)
-                                  {
-                                    Navigator.of(context)
-                                        .pushReplacementNamed('/home')
-                                  }
-                                else
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content:
-                                        const Text('Falha ao realizar o login'),
-                                    duration: const Duration(seconds: 5),
-                                    backgroundColor: Colors.red,
-                                  ))
-                              },
-                            );
-                      },
-                      child: Text('Login'),
-                    ),
-            )
+            CustomLoginButtonComponent(loginController: _controller),
           ],
         ),
       ),

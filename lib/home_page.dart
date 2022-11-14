@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:projeto/pages/cadastrar.dart';
+import 'package:projeto/pages/carousel.dart';
 import 'package:projeto/pages/contato.dart';
 import 'package:projeto/pages/dashboard.dart';
 import 'package:projeto/pages/todo_list_page.dart';
@@ -80,12 +81,29 @@ class _HomePageState extends State<HomePage> {
                 });
               },
             ),
+            ListTile(
+              title: Text('Img'),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                _pageController.jumpToPage(3);
+                Navigator.pop(context);
+                setState(() {
+                  indexBottomNavigationBar = 3;
+                });
+              },
+            ),
           ],
         ),
       ),
       body: PageView(
         controller: _pageController,
-        children: [Cadastrar(), Dasoboard(), Contato(), TodoListPage()],
+        children: [
+          Cadastrar(),
+          Dasoboard(),
+          Contato(),
+          TodoListPage(),
+          Carousel()
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: indexBottomNavigationBar,
@@ -126,6 +144,13 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
               ),
               label: 'List',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.image,
+                color: Colors.black,
+              ),
+              label: 'Carousel',
             ),
           ]),
     );
